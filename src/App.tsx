@@ -13,20 +13,23 @@ import {
     set,
 } from "./utils/localStorage";
 
+import TeamData from "./types/TeamData";
+
 import theme from "./styles/theme";
 import Header from "./components/Header";
 import LoadingState from "./components/LoadingState";
+import TeamsContainer from "./components/TeamsContainer";
 
 export default function App() {
     const [loading, setLoading] = useState<boolean>(true);
-    const [teamData, setTeamData] = useState<any>({});
+    const [teamData, setTeamData] = useState<TeamData>();
 
     // Mount team data on load, cache for 24hrs
     useEffect(() => {
         async function loadTeamData() {
             let teamData = get("teamData");
             if (!teamData) {
-                teamData = (await axios.get("https://tft-wtf-static.s3.us-west-1.amazonaws.com/test.json")).data;
+                teamData = (await axios.get("https://tft-wtf-static.s3.us-west-1.amazonaws.com/data.json")).data;
                 set("teamData", teamData, { expires: true, expireType: "days", expireLength: 1 });
             }
             setTeamData(teamData);
@@ -60,9 +63,11 @@ export default function App() {
                     maxWidth="1000px"
                 >
                     <Header />
-                    {loading ? (<LoadingState />) : (
-                        <></>
-                    )}
+                    {teamData && !loading ? (
+                        <TeamsContainer
+                            teamData={teamData}
+                        />
+                    ) : (<LoadingState />)}
                 </Flex>
             </Flex>
         </ChakraProvider>
