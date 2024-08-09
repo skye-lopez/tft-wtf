@@ -15,13 +15,13 @@ import {
 
 import theme from "./styles/theme";
 import Header from "./components/Header";
+import LoadingState from "./components/LoadingState";
 
 export default function App() {
     const [loading, setLoading] = useState<boolean>(true);
     const [teamData, setTeamData] = useState<any>({});
 
-    // Mount team data on load
-    // also cache for 24hrs to remove redundant requests.
+    // Mount team data on load, cache for 24hrs
     useEffect(() => {
         async function loadTeamData() {
             let teamData = get("teamData");
@@ -55,10 +55,14 @@ export default function App() {
                 <Flex
                     display="flex"
                     alignItems="center"
+                    flexDirection="column"
                     width="100%"
                     maxWidth="1000px"
                 >
                     <Header />
+                    {loading ? (<LoadingState />) : (
+                        <></>
+                    )}
                 </Flex>
             </Flex>
         </ChakraProvider>
