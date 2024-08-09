@@ -3,14 +3,14 @@ import {
     ChakraProvider,
     Flex,
     Text,
-    theme,
 } from "@chakra-ui/react"
+import theme from "./styles/theme";
 
 export default function App() {
     return (
         <ChakraProvider theme={theme}>
             <Flex>
-                <Text>Test</Text>
+                <Text>TFT.WTF</Text>
             </Flex>
         </ChakraProvider>
     );
