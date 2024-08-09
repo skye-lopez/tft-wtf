@@ -3,11 +3,11 @@ import {
     Text,
 } from "@chakra-ui/react";
 
-interface TeamsContainerProps {
+interface DataInfoBannerProps {
     sample: number
 }
 
-export default function TeamsContainer({ sample }: TeamsContainerProps) {
+export default function DataInfoBanner({ sample }: DataInfoBannerProps) {
     return (
         <Flex>
             <Flex>

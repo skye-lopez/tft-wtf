@@ -1,4 +1,4 @@
-interface Augment {
+export interface Augment {
     id: string
     places: number[]
     sample: number
@@ -9,7 +9,7 @@ interface Augment {
     top4: number
 }
 
-interface Team {
+export interface Team {
     id: string
     unit_ids: string[]
     places: number[]
@@ -21,7 +21,7 @@ interface Team {
     top4: number
 }
 
-interface UnitItem {
+export interface UnitItem {
     id: string
     places: number[]
     sample: number
@@ -32,7 +32,7 @@ interface UnitItem {
     top4: number
 }
 
-interface Unit {
+export interface Unit {
     id: string
     items: UnitItem[]
     places: number[]
@@ -44,7 +44,7 @@ interface Unit {
     top4: number
 }
 
-export default interface TeamData {
+export interface TeamData {
     augments: Augment[]
     teams: Team[]
     units: Unit[]

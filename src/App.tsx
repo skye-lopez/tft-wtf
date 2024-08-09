@@ -13,12 +13,14 @@ import {
     set,
 } from "./utils/localStorage";
 
-import TeamData from "./types/TeamData";
+import { TeamData } from "./types/TeamData";
 
 import theme from "./styles/theme";
 import Header from "./components/Header";
 import LoadingState from "./components/LoadingState";
 import TeamsContainer from "./components/TeamsContainer";
+import AugmentBanner from "./components/AugmentBanner";
+import DataInfoBanner from "./components/DataInfoBanner";
 
 export default function App() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -63,11 +65,17 @@ export default function App() {
                     maxWidth="1000px"
                 >
                     <Header />
-                    {teamData && !loading ? (
+                    {teamData && !loading ? (<>
+                        <DataInfoBanner
+                            sample={teamData.sample}
+                        />
+                        <AugmentBanner
+                            augments={teamData.augments}
+                        />
                         <TeamsContainer
                             teamData={teamData}
                         />
-                    ) : (<LoadingState />)}
+                    </>) : (<LoadingState />)}
                 </Flex>
             </Flex>
         </ChakraProvider>

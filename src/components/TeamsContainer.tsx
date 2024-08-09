@@ -2,21 +2,21 @@ import {
     Flex,
     Text,
 } from "@chakra-ui/react";
-import TeamData from "../types/TeamData";
+import { TeamData, Team } from "../types/TeamData";
 
-import TeamsContainerInfo from "./TeamsContainerInfo";
+import {
+    useState,
+    useEffect,
+} from "react";
 
 interface TeamsContainerProps {
     teamData: TeamData
 }
 
 export default function TeamsContainer({ teamData }: TeamsContainerProps) {
+    const [loaded, setLoaded] = useState<Team[]>([])
     return (
         <Flex>
-            {/* INFO BANNER */}
-            <TeamsContainerInfo
-                sample={teamData.sample}
-            />
         </Flex>
     );
 }
