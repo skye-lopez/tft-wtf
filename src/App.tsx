@@ -6,11 +6,28 @@ import {
 } from "@chakra-ui/react"
 import theme from "./styles/theme";
 
+import Header from "./components/Header";
+
 export default function App() {
     return (
         <ChakraProvider theme={theme}>
-            <Flex>
-                <Text>TFT.WTF</Text>
+            {/* Global container */}
+            <Flex
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                w="100%"
+                h="100%"
+            >
+                {/* Content container */}
+                <Flex
+                    display="flex"
+                    alignItems="center"
+                    width="100%"
+                    maxWidth="1000px"
+                >
+                    <Header />
+                </Flex>
             </Flex>
         </ChakraProvider>
     );
