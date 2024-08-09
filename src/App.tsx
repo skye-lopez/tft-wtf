@@ -62,7 +62,7 @@ export default function App() {
                     alignItems="center"
                     flexDirection="column"
                     width="100%"
-                    maxWidth="1000px"
+                    maxWidth="1400px"
                 >
                     <Header />
                     {teamData && !loading ? (<>
