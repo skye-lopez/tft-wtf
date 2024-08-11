@@ -19,8 +19,6 @@ import theme from "./styles/theme";
 import Header from "./components/Header";
 import LoadingState from "./components/LoadingState";
 import TeamsContainer from "./components/TeamsContainer";
-import AugmentBanner from "./components/AugmentBanner";
-import DataInfoBanner from "./components/DataInfoBanner";
 
 export default function App() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -66,12 +64,6 @@ export default function App() {
                 >
                     <Header />
                     {teamData && !loading ? (<>
-                        <DataInfoBanner
-                            sample={teamData.sample}
-                        />
-                        <AugmentBanner
-                            augments={teamData.augments}
-                        />
                         <TeamsContainer
                             teamData={teamData}
                         />

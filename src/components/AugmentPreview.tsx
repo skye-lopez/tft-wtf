@@ -24,8 +24,8 @@ export default function AugmentPreview({ augment }: AugmentPreviewProps) {
             margin="5px"
             borderRadius="10px"
             flexDir="column"
-            width="200px"
-            height="110px"
+            width="235px"
+            height="150px"
         >
             {/* Image + Stats */}
             <Flex
@@ -38,8 +38,8 @@ export default function AugmentPreview({ augment }: AugmentPreviewProps) {
                     <Flex
                         background="white"
                         borderRadius="10px"
-                        w="50px"
-                        h="50px"
+                        w="75px"
+                        h="75px"
                     />
                 </Flex>
 
