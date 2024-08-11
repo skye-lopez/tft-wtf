@@ -29,6 +29,14 @@ function augmentIdToName(id: string): string {
     return readableName;
 }
 
+// TODO: Space between words
+function unitIdToName(unit: string): string {
+    // TFT<Set>_{Name}~<Set>~<Patch>
+    let splitName = unit.split("_");
+    splitName = splitName[1].split("~");
+    return splitName[0];
+}
+
 function formatAvg(avg: number): string {
     const fixedNum = avg.toFixed(2);
     return fixedNum.toString();
@@ -41,6 +49,7 @@ function formatPercent(percent: number): string {
 
 export {
     augmentIdToName,
+    unitIdToName,
     formatAvg,
     formatPercent,
 }
