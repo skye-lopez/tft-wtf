@@ -3,6 +3,9 @@ import {
     Text,
 } from "@chakra-ui/react";
 import {
+    ArrowForwardIcon,
+} from "@chakra-ui/icons";
+import {
     useEffect,
     useState,
 } from "react";
@@ -18,7 +21,7 @@ export default function AugmentBanner({ augments }: AugmentBannerProps) {
 
     useEffect(() => {
         if (augments.length > 0) {
-            setPreviewAguments(augments.slice(0, 10));
+            setPreviewAguments(augments.slice(0, 5));
         }
     }, [augments]);
 
@@ -27,21 +30,42 @@ export default function AugmentBanner({ augments }: AugmentBannerProps) {
             width="95%"
             borderRadius="10px"
             margin="20px 0px"
-            padding="10px"
-            height="100px"
+            padding="10px 15px"
             background="white"
             justifyContent="center"
+            alignItems="center"
             display="flex"
+            flexDirection="column"
         >
             <Text
                 as="b"
             >
-                Best Augments
+                Top Augments
             </Text>
-            <Flex>
+            <Flex
+                alignItems="center"
+                flexWrap="wrap"
+            >
                 {previewAugments.length > 0 ? (
                     previewAugments.map((a, i) => <AugmentPreview key={i} augment={a} />)
                 ) : null}
+                <Flex
+                    width="200px"
+                    alignItems="center"
+                    justifyContent="center"
+                    flexDir="column"
+                    background="pink.200"
+                    height="110px"
+                    borderRadius="10px"
+                    _hover={{ background: "pink.500", color: "white", cursor: "pointer", fontWeight: "bold" }}
+                >
+                    <Text>
+                        All Augments
+                    </Text>
+                    <ArrowForwardIcon
+                        boxSize={10}
+                    />
+                </Flex>
             </Flex>
         </Flex>
     );
