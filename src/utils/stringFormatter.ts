@@ -34,7 +34,26 @@ function unitIdToName(unit: string): string {
     // TFT<Set>_{Name}~<Set>~<Patch>
     let splitName = unit.split("_");
     splitName = splitName[1].split("~");
-    return splitName[0];
+    const name = splitName[0];
+    if (name === "Blitzcrank") return "Blitz";
+    if (name === "Mordekaiser") return "Mord";
+    if (name === "TahmKench") return "Tahm";
+    if (name === "Cassiopeia") return "Cassio";
+    return name;
+}
+
+interface UnitIdInfo {
+    set: string
+    patch: string
+    rawName: string
+}
+function parseUnitId(unit: string): UnitIdInfo {
+    const [rawName, set, patch] = unit.split("~");
+    return {
+        rawName,
+        set,
+        patch
+    }
 }
 
 function formatAvg(avg: number): string {
@@ -50,6 +69,7 @@ function formatPercent(percent: number): string {
 export {
     augmentIdToName,
     unitIdToName,
+    parseUnitId,
     formatAvg,
     formatPercent,
 }

@@ -13,7 +13,12 @@ import {
     set,
 } from "./utils/localStorage";
 
-import { TeamData } from "./types/TeamData";
+import {
+    TeamData,
+    Team,
+    Augment,
+    Unit,
+} from "./types/TeamData";
 
 import theme from "./styles/theme";
 import Header from "./components/Header";
@@ -30,6 +35,9 @@ export default function App() {
             let teamData = get("teamData");
             if (!teamData) {
                 teamData = (await axios.get("https://tft-wtf-static.s3.us-west-1.amazonaws.com/data.json")).data;
+                teamData?.teams.sort((a: Team, b: Team) => a.avg - b.avg);
+                teamData?.augments.sort((a: Augment, b: Augment) => a.avg - b.avg)
+                teamData?.units.sort((a: Unit, b: Unit) => a.avg - b.avg)
                 set("teamData", teamData, { expires: true, expireType: "days", expireLength: 1 });
             }
             setTeamData(teamData);
