@@ -173,7 +173,7 @@ export default function TeamsContainer({ teamData, unitMap }: TeamsContainerProp
                 padding="10px"
                 margin="10px"
             >
-                Click any unit to get its best items! :)
+                Click any unit to get its best items! Augment data coming soon.
             </Code>
 
             <Flex

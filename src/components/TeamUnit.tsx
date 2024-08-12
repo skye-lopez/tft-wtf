@@ -28,6 +28,8 @@ export default function TeamUnit({ unit, addUnitBanner }: TeamUnitProps) {
             maxWidth="50px"
             _hover={{ cursor: "pointer" }}
             onClick={() => addUnitBanner(unit)}
+            background="whitesmoke"
+            borderRadius="10px"
         >
             {/* Image placeholder */}
             <Flex>
@@ -35,7 +37,7 @@ export default function TeamUnit({ unit, addUnitBanner }: TeamUnitProps) {
                     src={getUnitIconURL(unit)}
                     w="48px"
                     h="48px"
-                    border="2px solid black"
+                    border="1px solid pink"
                     borderRadius="5px"
                     _hover={{ border: "2px solid yellow" }}
                 />
