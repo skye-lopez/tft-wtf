@@ -2,11 +2,13 @@ import {
     Flex,
     Text,
     Select,
+    Code,
 } from "@chakra-ui/react";
 import {
     ChevronDownIcon
 } from "@chakra-ui/icons";
 import { TeamData, Team } from "../types/TeamData";
+import { UnitMap } from "../App";
 
 import DataInfoBanner from "./DataInfoBanner";
 import TeamInfo from "./TeamInfo";
@@ -18,9 +20,10 @@ import {
 
 interface TeamsContainerProps {
     teamData: TeamData
+    unitMap: UnitMap
 }
 
-export default function TeamsContainer({ teamData }: TeamsContainerProps) {
+export default function TeamsContainer({ teamData, unitMap }: TeamsContainerProps) {
     const [filteredTeamData, setFilteredTeamData] = useState<Team[]>([]);
     // sample, avg, top4%
     const [filters, setFilters] = useState<number[]>([100, 5, 40]);
@@ -28,7 +31,7 @@ export default function TeamsContainer({ teamData }: TeamsContainerProps) {
     function updateFilter(e: any, idx: number) {
         setFilters((old: number[]) => {
             const n = [...old];
-            n[idx] = e.target.value;
+            n[idx] = parseInt(e.target.value);
             return n;
         });
     }
@@ -51,31 +54,30 @@ export default function TeamsContainer({ teamData }: TeamsContainerProps) {
             flexDir="column"
             alignItems="center"
         >
-            {/* TITLE */}
-            <Text
-                as="b"
-                fontSize="xl"
-                marginBottom="10px"
-            >
-                Top Teams
-            </Text>
-
-            <DataInfoBanner
-                sample={teamData.sample}
-            />
-
             {/* Filtering */}
             <Flex
                 direction="column"
                 alignItems="center"
                 marginTop="10px"
             >
+
+                <Code
+                    padding="5px"
+                    margin="5px"
+                    borderRadius="10px"
+                    background="green.100"
+                >
+                    The intention of this site is to provide high elo data on what team compositions place well. It intentionally doesn't have guides, as I feel playing TFT as a flow chart doesn't make you a better player and takes a lot of fun and creativity out of the game. If you seek that, TFT Academy makes great guides.
+                </Code>
                 <Text
                     as="b"
+                    fontSize="2xl"
                 >
                     Filters
                 </Text>
-                <Flex>
+                <Flex
+                    wrap="wrap"
+                >
                     <Flex
                         alignItems="center"
                         margin="10px"
@@ -166,6 +168,14 @@ export default function TeamsContainer({ teamData }: TeamsContainerProps) {
                 </Flex>
             </Flex>
 
+            <Code
+                background="purple.100"
+                padding="10px"
+                margin="10px"
+            >
+                Click any unit to get its best items! :)
+            </Code>
+
             <Flex
                 flexDir="column"
             >
@@ -173,6 +183,7 @@ export default function TeamsContainer({ teamData }: TeamsContainerProps) {
                     <TeamInfo
                         key={i}
                         team={t}
+                        unitMap={unitMap}
                     />
                 ))}
             </Flex>

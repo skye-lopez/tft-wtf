@@ -56,6 +56,22 @@ function parseUnitId(unit: string): UnitIdInfo {
     }
 }
 
+interface ItemInfo {
+    itemNames: string[]
+    readableNames: string[]
+}
+
+function parseItemId(id: string) {
+    const splitId = id.split("~");
+    splitId.splice(0, 3);
+    const readableNames = splitId.map((n) => n.split("TFT_Item_")[1]);
+
+    return {
+        itemNames: splitId,
+        readableNames: readableNames,
+    }
+}
+
 function formatAvg(avg: number): string {
     const fixedNum = avg.toFixed(2);
     return fixedNum.toString();
@@ -70,6 +86,7 @@ export {
     augmentIdToName,
     unitIdToName,
     parseUnitId,
+    parseItemId,
     formatAvg,
     formatPercent,
 }

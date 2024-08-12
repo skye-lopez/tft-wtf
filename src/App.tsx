@@ -25,9 +25,14 @@ import Header from "./components/Header";
 import LoadingState from "./components/LoadingState";
 import TeamsContainer from "./components/TeamsContainer";
 
+export interface UnitMap {
+    [key: string]: Unit
+}
+
 export default function App() {
     const [loading, setLoading] = useState<boolean>(true);
     const [teamData, setTeamData] = useState<TeamData>();
+    const [unitMap, setUnitMap] = useState<UnitMap>({});
 
     // Mount team data on load, cache for 24hrs
     useEffect(() => {
@@ -40,6 +45,13 @@ export default function App() {
                 teamData?.units.sort((a: Unit, b: Unit) => a.avg - b.avg)
                 set("teamData", teamData, { expires: true, expireType: "days", expireLength: 1 });
             }
+            const unitMap: UnitMap = {};
+            teamData?.units.map((u: Unit) => {
+                u.items.sort((a: any, b: any) => a.avg - b.avg);
+                unitMap[u.id] = u;
+            });
+
+            setUnitMap(unitMap);
             setTeamData(teamData);
         }
 
@@ -70,10 +82,13 @@ export default function App() {
                     width="100%"
                     maxWidth="1400px"
                 >
-                    <Header />
+                    <Header
+                        sample={teamData?.sample ?? 0}
+                    />
                     {teamData && !loading ? (<>
                         <TeamsContainer
                             teamData={teamData}
+                            unitMap={unitMap}
                         />
                     </>) : (<LoadingState />)}
                 </Flex>

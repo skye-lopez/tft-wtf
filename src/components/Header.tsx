@@ -1,25 +1,28 @@
 import {
     Flex,
     Text,
-    Icon,
     Button,
-    Input,
-    InputGroup,
-    InputLeftAddon,
+    Code,
 } from "@chakra-ui/react";
 import {
-    SearchIcon,
+    QuestionOutlineIcon,
 } from "@chakra-ui/icons";
 import { FaRegHeart } from "react-icons/fa";
 
+import DataInfoBanner from "./DataInfoBanner";
+
+interface HeaderProps {
+    sample: number
+}
+
 // TODO: LOTS, this is just a frame for now.
-export default function Header() {
+export default function Header({ sample }: HeaderProps) {
     return (
         <Flex
             display="flex"
             flexDirection="row"
             w="100%"
-            justifyContent="space-between"
+            justifyContent="space-evenly"
             alignItems="center"
             padding="10px"
             margin="10px 0px"
@@ -29,57 +32,35 @@ export default function Header() {
             borderRadius="10px"
         >
             {/* LOGO */}
-            <Text
-                fontSize="2xl"
-                fontWeight="800"
-                background="#A8D"
-                color="white"
-                borderRadius="10px"
-                padding="5px 10px"
-            >
-                TFT.WTF
-            </Text>
-            {/* SEARCH */}
-
-            {/* Buttons */}
             <Flex
+                alignItems="center"
             >
-                <Flex
-                    margin="5px"
+                <Text
+                    fontSize="2xl"
+                    fontWeight="800"
+                    background="#A8D"
+                    color="white"
+                    borderRadius="10px"
+                    padding="5px 10px"
+                    height="50px"
                 >
-                    <InputGroup>
-                        <InputLeftAddon>
-                            <SearchIcon />
-                        </InputLeftAddon>
-                        <Input
-                            width="100%"
-                        />
-                    </InputGroup>
-                </Flex>
-                <Button
-                    margin="5px"
-                >
-                    Units
-                </Button>
-                <Button
-                    margin="5px"
-                >
-                    Augments
-                </Button>
-                <Button
-                    colorScheme="purple"
-                    margin="5px"
-                >
-                    Teams
-                </Button>
+                    TFT.WTF
+                </Text>
                 <Button
                     colorScheme="pink"
                     margin="5px"
+                    height="50px"
+                    onClick={() => window.open("https://buymeacoffee.com/arialopez", "_blank")}
                 >
-                    <Icon as={FaRegHeart} />
+                    <FaRegHeart
+                        size="25px"
+                    />
                 </Button>
             </Flex>
 
+            <DataInfoBanner
+                sample={sample}
+            />
         </Flex>
     );
 }
