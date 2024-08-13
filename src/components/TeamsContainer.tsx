@@ -67,7 +67,7 @@ export default function TeamsContainer({ teamData, unitMap }: TeamsContainerProp
                     borderRadius="10px"
                     background="green.100"
                 >
-                    The intention of this site is to provide high elo data on what team compositions place well. It intentionally doesn't have guides, as I feel playing TFT as a flow chart doesn't make you a better player and takes a lot of fun and creativity out of the game. If you seek that, TFT Academy makes great guides.
+                    High elo team and unit data. No guide's, just data, and the ability to filter. GLHF :)
                 </Code>
                 <Text
                     as="b"
