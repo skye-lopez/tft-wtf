@@ -2,7 +2,7 @@ import {
     Flex,
     Text,
     Button,
-    Code,
+    Tooltip,
 } from "@chakra-ui/react";
 import {
     QuestionOutlineIcon,
@@ -13,10 +13,12 @@ import DataInfoBanner from "./DataInfoBanner";
 
 interface HeaderProps {
     sample: number
+    setSelectedGroup: Function
+    selectedGroup: string
 }
 
 // TODO: LOTS, this is just a frame for now.
-export default function Header({ sample }: HeaderProps) {
+export default function Header({ sample, setSelectedGroup, selectedGroup }: HeaderProps) {
     return (
         <Flex
             display="flex"
@@ -56,6 +58,52 @@ export default function Header({ sample }: HeaderProps) {
                         size="25px"
                     />
                 </Button>
+            </Flex>
+            <Flex
+                background="white"
+                padding="10px 3px"
+                borderRadius="10px"
+                wrap="wrap"
+            >
+                <Button
+                    margin="3px 10px"
+                    colorScheme={selectedGroup === "teams" ? "blue" : "gray"}
+                >
+                    Top Teams
+                </Button>
+                <Tooltip
+                    label="Coming soon!"
+                >
+                    <Button
+                        margin="3px 10px"
+                        colorScheme={selectedGroup === "builder" ? "blue" : "gray"}
+                        isDisabled={true}
+                    >
+                        Team Builder
+                    </Button>
+                </Tooltip>
+                <Tooltip
+                    label="Coming soon!"
+                >
+                    <Button
+                        margin="3px 10px"
+                        colorScheme={selectedGroup === "augments" ? "blue" : "gray"}
+                        isDisabled={true}
+                    >
+                        Augments
+                    </Button>
+                </Tooltip>
+                <Tooltip
+                    label="Coming soon!"
+                >
+                    <Button
+                        margin="3px 10px"
+                        colorScheme={selectedGroup === "units" ? "blue" : "gray"}
+                        isDisabled={true}
+                    >
+                        Units
+                    </Button>
+                </Tooltip>
             </Flex>
 
             <DataInfoBanner

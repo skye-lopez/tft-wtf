@@ -33,6 +33,7 @@ export default function App() {
     const [loading, setLoading] = useState<boolean>(true);
     const [teamData, setTeamData] = useState<TeamData>();
     const [unitMap, setUnitMap] = useState<UnitMap>({});
+    const [selectedGroup, setSelectedGroup] = useState<string>("teams");
 
     // Mount team data on load, cache for 24hrs
     useEffect(() => {
@@ -84,11 +85,14 @@ export default function App() {
                 >
                     <Header
                         sample={teamData?.sample ?? 0}
+                        setSelectedGroup={setSelectedGroup}
+                        selectedGroup={selectedGroup}
                     />
                     {teamData && !loading ? (<>
                         <TeamsContainer
                             teamData={teamData}
                             unitMap={unitMap}
+                            selectedGroup={selectedGroup}
                         />
                     </>) : (<LoadingState />)}
                 </Flex>
