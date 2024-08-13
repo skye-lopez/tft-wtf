@@ -44,7 +44,7 @@ export default function Header({ sample }: HeaderProps) {
                     padding="5px 10px"
                     height="50px"
                 >
-                    TFT.WTF
+                    tftstats.xyz
                 </Text>
                 <Button
                     colorScheme="pink"
