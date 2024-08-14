@@ -68,6 +68,7 @@ export default function Header({ sample, setSelectedGroup, selectedGroup }: Head
                 <Button
                     margin="3px 10px"
                     colorScheme={selectedGroup === "teams" ? "blue" : "gray"}
+                    onClick={() => setSelectedGroup("teams")}
                 >
                     Top Teams
                 </Button>
@@ -82,17 +83,14 @@ export default function Header({ sample, setSelectedGroup, selectedGroup }: Head
                         Team Builder
                     </Button>
                 </Tooltip>
-                <Tooltip
-                    label="Coming soon!"
+                <Button
+                    margin="3px 10px"
+                    colorScheme={selectedGroup === "augments" ? "blue" : "gray"}
+                    onClick={() => setSelectedGroup("augments")}
+                    isDisabled={true}
                 >
-                    <Button
-                        margin="3px 10px"
-                        colorScheme={selectedGroup === "augments" ? "blue" : "gray"}
-                        isDisabled={true}
-                    >
-                        Augments
-                    </Button>
-                </Tooltip>
+                    Augments
+                </Button>
                 <Tooltip
                     label="Coming soon!"
                 >

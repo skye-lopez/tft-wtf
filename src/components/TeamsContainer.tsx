@@ -5,11 +5,9 @@ import {
     Code,
     Button,
 } from "@chakra-ui/react";
-import { TeamData, Team } from "../types/TeamData";
+import { TeamData, Team, Augment } from "../types/TeamData";
 import { UnitMap } from "../App";
-
-import DataInfoBanner from "./DataInfoBanner";
-import TeamInfo from "./TeamInfo";
+import Augments from "./Augments";
 
 import {
     useState,
@@ -55,7 +53,8 @@ export default function TeamsContainer({ teamData, unitMap, selectedGroup }: Tea
         >
             {
                 selectedGroup === "teams" ? (<TopTeams updateFilter={updateFilter} filteredTeamData={filteredTeamData} unitMap={unitMap} />)
-                    : null
+                    : selectedGroup === "augments" ? (<Augments augmentData={teamData.augments} />)
+                        : null
             }
             {/* Filtering */}
 

@@ -1,3 +1,5 @@
+import { PulseLoader } from "react-spinners";
+
 function augmentIdToName(id: string): string {
     let readableName = "";
     // Format: TFT<setNumber>_Augment_{Name (can contain _)}~Set~Patch
@@ -61,7 +63,7 @@ interface ItemInfo {
     readableNames: string[]
 }
 
-function parseItemId(id: string) {
+function parseItemId(id: string): ItemInfo {
     const splitId = id.split("~");
     splitId.splice(0, 3);
     const readableNames = splitId.map((n) => n.split("TFT_Item_")[1]);
@@ -70,6 +72,43 @@ function parseItemId(id: string) {
         itemNames: splitId,
         readableNames: readableNames,
     }
+}
+
+interface AugmentIdInfo {
+    rawName: string
+    readableName: string
+    gameReadableName: string
+    set: string
+    patch: string
+    imageUrl: string
+}
+
+const GAME_NAME_MAP = {
+    "NunuCarry": "Sweet Tooth",
+    "NunuCarryPlus": "Sweet Tooth+",
+    "GalioCarry": "Deja Vu",
+    "GalioCarryPlus": "Deja Vu+",
+    "PortalCrest": "Portal Crest",
+    "PortalCrown": "Portal Crown",
+}
+
+function getAugmentURL(id: string): string {
+    const baseUrl = "https://tft-wtf-static.s3.us-west-1.amazonaws.com/tft-augment/";
+    return baseUrl;
+}
+
+function parseAugmentId(id: string): AugmentIdInfo {
+    // TFT<set>_Augment_{Name}~<set>~<patch>
+    const [rawName, set, patch] = id.split("~");
+    const splitName = rawName.split("Augment_");
+    return {
+        rawName,
+        readableName: splitName[splitName.length - 1],
+        gameReadableName: "",
+        set,
+        patch,
+        imageUrl: "",
+    };
 }
 
 function formatAvg(avg: number): string {
@@ -85,6 +124,7 @@ function formatPercent(percent: number): string {
 export {
     augmentIdToName,
     unitIdToName,
+    parseAugmentId,
     parseUnitId,
     parseItemId,
     formatAvg,
