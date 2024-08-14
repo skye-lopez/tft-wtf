@@ -27,17 +27,34 @@ export default function TopTeams({ updateFilter, filteredTeamData, unitMap }: To
                 width="100%"
                 justifyContent="center"
             >
-                <Code
-                    background="purple.100"
-                    padding="10px"
-                    margin="10px 10px"
-                    textAlign={"center"}
-                    borderRadius="10px"
-                    as="b"
-                    width="fit-content"
+                <Flex
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
                 >
-                    Sorted by Avg. Data filters below. Click any unit to get its best items.
-                </Code>
+                    <Code
+                        background="purple.100"
+                        padding="10px"
+                        margin="10px 10px"
+                        textAlign={"center"}
+                        borderRadius="10px"
+                        as="b"
+                        width="fit-content"
+                    >
+                        Sorted by Avg. Data filters below. Click any unit to get its best items.
+                    </Code>
+                    <Code
+                        background="red.100"
+                        padding="10px"
+                        margin="10px 10px"
+                        textAlign={"center"}
+                        borderRadius="10px"
+                        as="b"
+                        width="fit-content"
+                    >
+                        Patch 14.16 is new! Sample sizes are low, if you're trying to climb you may want to wait for data to even out.
+                    </Code>
+                </Flex>
             </Flex>
             {/* FILTER */}
             <Flex
@@ -68,11 +85,11 @@ export default function TopTeams({ updateFilter, filteredTeamData, unitMap }: To
                             border="2px solid purple.300"
                             onChange={(e) => updateFilter(e, 0)}
                         >
+                            <option value={0}>Any</option>
                             <option value={100}>&#8805; 100</option>
                             <option value={500}>&#8805; 500</option>
                             <option value={1000}>&#8805; 1000</option>
                             <option value={2000}>&#8805; 2000</option>
-                            <option value={0}>Any</option>
                         </Select>
                     </Flex>
                     <Flex

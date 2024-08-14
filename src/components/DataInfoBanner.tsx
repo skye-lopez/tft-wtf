@@ -31,7 +31,7 @@ export default function DataInfoBanner({ sample }: DataInfoBannerProps) {
                     as="b"
                     color="#A8D"
                 >
-                    14.15
+                    14.16
                 </Text>
             </Flex>
             <Flex

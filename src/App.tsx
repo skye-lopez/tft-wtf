@@ -29,34 +29,55 @@ export interface UnitMap {
     [key: string]: Unit
 }
 
+
 export default function App() {
     const [loading, setLoading] = useState<boolean>(true);
     const [teamData, setTeamData] = useState<TeamData>();
     const [unitMap, setUnitMap] = useState<UnitMap>({});
     const [selectedGroup, setSelectedGroup] = useState<string>("teams");
 
-    // Mount team data on load, cache for 24hrs
-    useEffect(() => {
-        async function loadTeamData() {
+    function sortTeamData(teamData: TeamData): void {
+        teamData?.teams.sort((a: Team, b: Team) => a.avg - b.avg);
+        teamData?.augments.sort((a: Augment, b: Augment) => a.avg - b.avg)
+        teamData?.units.sort((a: Unit, b: Unit) => a.avg - b.avg)
+    }
+
+    function getUnitMap(units: Unit[]): UnitMap {
+        if (!units) return {};
+        const unitMap: UnitMap = {};
+        units.map((u: Unit) => {
+            u.items.sort((a: any, b: any) => a.avg - b.avg);
+            unitMap[u.id] = u;
+        });
+        return unitMap;
+    }
+
+    async function loadTeamData(cache: boolean, setUnitMap: Function, setTeamData: Function) {
+        if (cache) {
             let teamData = get("teamData");
             if (!teamData) {
                 teamData = (await axios.get("https://tft-wtf-static.s3.us-west-1.amazonaws.com/data.json")).data;
-                teamData?.teams.sort((a: Team, b: Team) => a.avg - b.avg);
-                teamData?.augments.sort((a: Augment, b: Augment) => a.avg - b.avg)
-                teamData?.units.sort((a: Unit, b: Unit) => a.avg - b.avg)
+                sortTeamData(teamData);
                 set("teamData", teamData, { expires: true, expireType: "days", expireLength: 1 });
             }
-            const unitMap: UnitMap = {};
-            teamData?.units.map((u: Unit) => {
-                u.items.sort((a: any, b: any) => a.avg - b.avg);
-                unitMap[u.id] = u;
-            });
+            const unitMap = getUnitMap(teamData?.units);
 
             setUnitMap(unitMap);
             setTeamData(teamData);
+            return;
         }
+        const teamData = (await axios.get("https://tft-wtf-static.s3.us-west-1.amazonaws.com/data.json")).data;
+        sortTeamData(teamData);
+        const unitMap = getUnitMap(teamData?.units);
 
-        loadTeamData();
+        setUnitMap(unitMap);
+        setTeamData(teamData);
+    }
+
+    // Mount team data on load, cache for 24hrs
+    // NOTE: For new patches we will not cache for 1 week
+    useEffect(() => {
+        loadTeamData(false, setUnitMap, setTeamData);
     }, []);
 
     useEffect(() => {

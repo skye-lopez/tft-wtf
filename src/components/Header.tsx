@@ -4,9 +4,6 @@ import {
     Button,
     Tooltip,
 } from "@chakra-ui/react";
-import {
-    QuestionOutlineIcon,
-} from "@chakra-ui/icons";
 import { FaRegHeart } from "react-icons/fa";
 
 import DataInfoBanner from "./DataInfoBanner";
