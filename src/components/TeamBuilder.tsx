@@ -26,6 +26,7 @@ import {
     formatPercent,
     formatAvg,
 } from "../utils/stringFormatter";
+import unitMetaData from "../utils/UnitMetaData";
 import { Team } from "../types/TeamData";
 import LoadingState from "./LoadingState";
 import { UnitMap } from "../App";
@@ -344,8 +345,8 @@ function getUnitIconURL(unit: string): string {
 }
 
 function UnitIcon({ unit, updateEvent }: UnitIconProps) {
-    const [selected, setSelected] = useState(false);
-
+    const name = unitIdToName(unit);
+    const cost = unitMetaData[name]?.cost;
     return (
         <Flex
             flexDir="column"
@@ -362,9 +363,16 @@ function UnitIcon({ unit, updateEvent }: UnitIconProps) {
                     src={getUnitIconURL(unit)}
                     w="48px"
                     h="48px"
-                    border="1px solid pink"
+                    border={
+                        cost === 5 ? "2px solid yellow"
+                            : cost === 4 ? "2px solid purple"
+                                : cost === 3 ? "2px solid blue"
+                                    : cost === 2 ? "2px solid green"
+                                        : cost === 1 ? "2px solid gray"
+                                            : "2px solid black"
+                    }
                     borderRadius="5px"
-                    _hover={{ border: "2px solid yellow" }}
+                    _hover={{ border: "2px solid pink" }}
                 />
             </Flex>
             <Text

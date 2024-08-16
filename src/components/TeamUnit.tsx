@@ -7,6 +7,7 @@ import {
     unitIdToName,
     parseUnitId,
 } from "../utils/stringFormatter";
+import unitMetaData from "../utils/UnitMetaData";
 
 interface TeamUnitProps {
     unit: string
@@ -21,6 +22,8 @@ function getUnitIconURL(unit: string): string {
 }
 
 export default function TeamUnit({ unit, addUnitBanner }: TeamUnitProps) {
+    const name = unitIdToName(unit);
+    const cost = unitMetaData[name]?.cost;
     return (
         <Flex
             flexDir="column"
@@ -37,7 +40,14 @@ export default function TeamUnit({ unit, addUnitBanner }: TeamUnitProps) {
                     src={getUnitIconURL(unit)}
                     w="48px"
                     h="48px"
-                    border="1px solid pink"
+                    border={
+                        cost === 5 ? "2px solid yellow"
+                            : cost === 4 ? "2px solid purple"
+                                : cost === 3 ? "2px solid blue"
+                                    : cost === 2 ? "2px solid green"
+                                        : cost === 1 ? "2px solid gray"
+                                            : "2px solid black"
+                    }
                     borderRadius="5px"
                     _hover={{ border: "2px solid yellow" }}
                 />
