@@ -140,6 +140,7 @@ export default function TeamBuilder({ unitMap }: TeamBuilderProps) {
         <Flex
             flexDir="column"
             alignItems="center"
+            width="100%"
         >
             <Text
                 as="b"
@@ -299,7 +300,7 @@ export default function TeamBuilder({ unitMap }: TeamBuilderProps) {
                     background="white"
                     borderRadius="10px"
                     padding="10px"
-                    width="100%"
+                    margin="10px"
                 >
                     {/* Search filtering */}
                     <Text

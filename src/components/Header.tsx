@@ -33,17 +33,23 @@ export default function Header({ sample, setSelectedGroup, selectedGroup }: Head
             {/* LOGO */}
             <Flex
                 alignItems="center"
+                background="#A8D"
+                color="white"
+                borderRadius="10px"
+                padding="5px 10px"
+                height="50px"
             >
                 <Text
                     fontSize="2xl"
                     fontWeight="800"
-                    background="#A8D"
-                    color="white"
-                    borderRadius="10px"
-                    padding="5px 10px"
-                    height="50px"
                 >
                     tftstats.xyz
+                </Text>
+                <Text
+                    marginLeft="2px"
+                    fontWeight="500"
+                >
+                    (beta)
                 </Text>
             </Flex>
             <Flex
@@ -66,6 +72,13 @@ export default function Header({ sample, setSelectedGroup, selectedGroup }: Head
                 >
                     Team Builder
                 </Button>
+                <Button
+                    margin="3px 10px"
+                    colorScheme={selectedGroup === "units" ? "blue" : "gray"}
+                    onClick={() => setSelectedGroup("units")}
+                >
+                    Units
+                </Button>
                 <Tooltip
                     label="Coming soon!"
                 >
@@ -76,17 +89,6 @@ export default function Header({ sample, setSelectedGroup, selectedGroup }: Head
                         isDisabled={true}
                     >
                         Augments
-                    </Button>
-                </Tooltip>
-                <Tooltip
-                    label="Coming soon!"
-                >
-                    <Button
-                        margin="3px 10px"
-                        colorScheme={selectedGroup === "units" ? "blue" : "gray"}
-                        isDisabled={true}
-                    >
-                        Units
                     </Button>
                 </Tooltip>
             </Flex>

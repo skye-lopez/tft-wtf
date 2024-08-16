@@ -15,6 +15,7 @@ import {
 } from "react";
 import TopTeams from "./TopTeams";
 import TeamBuilder from "./TeamBuilder";
+import Units from "./Units";
 
 interface TeamsContainerProps {
     teamData: TeamData
@@ -51,12 +52,14 @@ export default function TeamsContainer({ teamData, unitMap, selectedGroup }: Tea
         <Flex
             flexDir="column"
             alignItems="center"
+            width="100%"
         >
             {
                 selectedGroup === "teams" ? (<TopTeams updateFilter={updateFilter} filteredTeamData={filteredTeamData} unitMap={unitMap} />)
                     : selectedGroup === "augments" ? (<Augments augmentData={teamData.augments} />)
                         : selectedGroup === "builder" ? (<TeamBuilder unitMap={unitMap} />)
-                            : null
+                            : selectedGroup === "units" ? (<Units units={teamData.units} />)
+                                : null
             }
             {/* Filtering */}
 
