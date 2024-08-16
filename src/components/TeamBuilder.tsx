@@ -56,6 +56,7 @@ interface TeamBuilderProps {
 export default function TeamBuilder({ unitMap }: TeamBuilderProps) {
     const [formattedTeams, setFormattedTeams] = useState<TeamBuilderData>({});
     const [loading, setLoading] = useState<boolean>(true);
+    const [unitsByCost, setUnitsByCost] = useState<any>([[], [], [], [], []]);
     const [selectedUnits, setSelectedUnits] = useState<string[]>([]);
     const [teamInfo, setTeamInfo] = useState<Team>();
 
@@ -99,6 +100,17 @@ export default function TeamBuilder({ unitMap }: TeamBuilderProps) {
 
     useEffect(() => {
         getBuilderData(false, setFormattedTeams);
+
+        setUnitsByCost(() => {
+            return Object.values(unitMap).reduce((acc: any[], cv) => {
+                const id = cv.id;
+                const name = unitIdToName(id);
+                const cost = unitMetaData?.[name]?.cost;
+                if (!cost) { return acc };
+                acc[cost - 1].push(id);
+                return acc;
+            }, [[], [], [], [], []]);
+        });
 
         window.onbeforeunload = (e) => {
             return "Data may be lost";
@@ -281,14 +293,13 @@ export default function TeamBuilder({ unitMap }: TeamBuilderProps) {
                 </Flex>
                 {/* UNIT SELECTION */}
                 <Flex
-                    width="100%"
                     alignItems="center"
                     justifyContent="center"
                     flexDir="column"
                     background="white"
                     borderRadius="10px"
                     padding="10px"
-                    margin="10px"
+                    width="100%"
                 >
                     {/* Search filtering */}
                     <Text
@@ -296,7 +307,8 @@ export default function TeamBuilder({ unitMap }: TeamBuilderProps) {
                     >
                         Click a unit to select
                     </Text>
-                    <Flex>
+                    <Flex
+                    >
                         <InputGroup>
                             <InputLeftAddon>
                                 <SearchIcon />
@@ -311,19 +323,38 @@ export default function TeamBuilder({ unitMap }: TeamBuilderProps) {
                     {/* Display units to select */}
                     <Flex
                         wrap="wrap"
-                        margin="10px"
                     >
-                        {Object.keys(unitMap).sort((a, b) => a.localeCompare(b)).map((u) => {
-                            const lower = u.toLowerCase();
-                            const readableName = unitIdToName(u).toLowerCase();
-                            if (lower.includes("elder") || lower.includes("winter") || lower.includes("yuumi")) {
-                                return null;
-                            }
-                            if (searchValue === "" || readableName.includes(searchValue)) {
-                                return (<UnitIcon unit={u} updateEvent={addUnitToSelection} />)
-                            }
-                            return null;
-                        })}
+                        <Flex
+                            flexDirection="column"
+                            wrap="wrap"
+                        >
+                            {unitsByCost.map((set: any[], i: number) => {
+                                return (
+                                    <Flex
+                                        flexDirection="column"
+                                        wrap="wrap"
+                                    >
+                                        <Text
+                                            as="b"
+                                        >
+                                            {(i + 1).toString()} Cost
+                                        </Text>
+                                        <Flex
+                                            direction="row"
+                                            wrap="wrap"
+                                        >
+                                            {set.map((u: string) => {
+                                                const readableName = unitIdToName(u).toLowerCase();
+                                                if (searchValue === "" || readableName.includes(searchValue)) {
+                                                    return (<UnitIcon unit={u} updateEvent={addUnitToSelection} />)
+                                                }
+                                                return null;
+                                            })}
+                                        </Flex>
+                                    </Flex>
+                                );
+                            })}
+                        </Flex>
                     </Flex>
                 </Flex>
             </Flex >
