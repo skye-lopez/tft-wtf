@@ -40,7 +40,7 @@ export default function UnitRow({ unit }: UnitRowProps) {
         <Flex
             width="100%"
             background="white"
-            margin="15px 10px"
+            margin="10px"
             padding="10px"
             borderRadius="10px"
         >
@@ -51,8 +51,10 @@ export default function UnitRow({ unit }: UnitRowProps) {
             >
                 <Image
                     src={getUnitIconURL(unit.id)}
-                    w="48px"
-                    h="48px"
+                    minW="48px"
+                    width="48px"
+                    minH="48px"
+                    height="48px"
                     border={
                         cost === 5 ? "2px solid yellow"
                             : cost === 4 ? "2px solid purple"

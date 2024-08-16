@@ -66,18 +66,10 @@ export default function Units({ units }: UnitsProps) {
                 </Flex>
             </Flex>
 
-            <Code
-                background="red.100"
-                padding="10px"
-                borderRadius="10px"
-                marginTop="10px"
-            >
-                This page is in beta, and is a bit slow for now. Please be patient :)
-            </Code>
-
             <Flex
                 flexDir="column"
                 margin="10px"
+                alignItems="center"
             >
                 {units.sort((a, b) => a.avg - b.avg).map((u, i) => {
                     if (searchValue === "" || unitIdToName(u.id).toLowerCase().includes(searchValue)) {
