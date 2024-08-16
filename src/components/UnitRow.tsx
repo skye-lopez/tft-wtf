@@ -211,57 +211,60 @@ function ItemSet({ id, avg, sample }: ItemSetProps) {
     return (
         <Flex
             margin="5px"
+            width={["200px", "300px"]}
         >
-            {itemNames.length > 0 ? (
-                <Flex>
+            {
+                itemNames.length > 0 ? (
                     <Flex>
-                        <Tooltip
-                            label={readableNames[0]}
-                        >
-                            <Image
-                                w="25px"
-                                h="25px"
-                                src={getItemIconURL(itemNames[0])}
-                            />
-                        </Tooltip>
-                    </Flex>
-                    <Flex>
-                        <Tooltip
-                            label={readableNames[1]}
-                        >
-                            <Image
-                                w="25px"
-                                h="25px"
-                                src={getItemIconURL(itemNames[1])}
-                            />
-                        </Tooltip>
-                    </Flex>
-                    <Flex>
-                        <Tooltip
-                            label={readableNames[2]}
-                        >
-                            <Image
-                                w="25px"
-                                h="25px"
-                                src={getItemIconURL(itemNames[2])}
-                            />
-                        </Tooltip>
-                    </Flex>
+                        <Flex>
+                            <Tooltip
+                                label={readableNames[0]}
+                            >
+                                <Image
+                                    w="25px"
+                                    h="25px"
+                                    src={getItemIconURL(itemNames[0])}
+                                />
+                            </Tooltip>
+                        </Flex>
+                        <Flex>
+                            <Tooltip
+                                label={readableNames[1]}
+                            >
+                                <Image
+                                    w="25px"
+                                    h="25px"
+                                    src={getItemIconURL(itemNames[1])}
+                                />
+                            </Tooltip>
+                        </Flex>
+                        <Flex>
+                            <Tooltip
+                                label={readableNames[2]}
+                            >
+                                <Image
+                                    w="25px"
+                                    h="25px"
+                                    src={getItemIconURL(itemNames[2])}
+                                />
+                            </Tooltip>
+                        </Flex>
 
-                    <Code
-                        marginLeft="10px"
-                    >
-                        Avg: {formatAvg(avg)}
-                    </Code>
+                        <Code
+                            marginLeft="10px"
+                        >
+                            Avg: {formatAvg(avg)}
+                        </Code>
 
-                    <Code
-                        marginLeft="5px"
-                    >
-                        Sample: {sample}
-                    </Code>
+                        <Code
+                            marginLeft="5px"
+                        >
+                            Sample: {sample}
+                        </Code>
 
-                </Flex>
-            ) : null}
-        </Flex>
+                    </Flex>
+                ) : null
+            }
+        </Flex >
     );
 }
