@@ -10,6 +10,7 @@ const unitMetaData: UnitMetaData = {
     "Ashe": { cost: 1, },
     "Bard": { cost: 3, },
     "Briar": { cost: 5, },
+    "Blitz": { cost: 1, },
     "Camille": { cost: 5, },
     "Cassio": { cost: 2, },
     "Diana": { cost: 5, },
