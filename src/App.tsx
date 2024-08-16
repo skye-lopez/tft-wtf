@@ -34,7 +34,7 @@ export default function App() {
     const [loading, setLoading] = useState<boolean>(true);
     const [teamData, setTeamData] = useState<TeamData>();
     const [unitMap, setUnitMap] = useState<UnitMap>({});
-    const [selectedGroup, setSelectedGroup] = useState<string>("teams");
+    const [selectedGroup, setSelectedGroup] = useState<string>("builder");
 
     function sortTeamData(teamData: TeamData): void {
         teamData?.teams.sort((a: Team, b: Team) => a.avg - b.avg);
@@ -53,23 +53,15 @@ export default function App() {
     }
 
     async function loadTeamData(cache: boolean, setUnitMap: Function, setTeamData: Function) {
-        if (cache) {
-            let teamData = get("teamData");
-            if (!teamData) {
-                teamData = (await axios.get("https://tft-wtf-static.s3.us-west-1.amazonaws.com/data.json")).data;
-                sortTeamData(teamData);
-                set("teamData", teamData, { expires: true, expireType: "days", expireLength: 1 });
-            }
-            const unitMap = getUnitMap(teamData?.units);
-
-            setUnitMap(unitMap);
-            setTeamData(teamData);
-            return;
+        let teamData;
+        if (cache) { teamData = get("teamData"); }
+        if (!teamData) {
+            teamData = (await axios.get("https://tft-wtf-static.s3.us-west-1.amazonaws.com/data.json")).data;
         }
-        const teamData = (await axios.get("https://tft-wtf-static.s3.us-west-1.amazonaws.com/data.json")).data;
         sortTeamData(teamData);
         const unitMap = getUnitMap(teamData?.units);
 
+        if (cache) { set("teamData", teamData, { expires: true, expireType: "days", expireLength: 1 }); }
         setUnitMap(unitMap);
         setTeamData(teamData);
     }

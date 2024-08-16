@@ -14,6 +14,7 @@ import {
     useEffect,
 } from "react";
 import TopTeams from "./TopTeams";
+import TeamBuilder from "./TeamBuilder";
 
 interface TeamsContainerProps {
     teamData: TeamData
@@ -54,7 +55,8 @@ export default function TeamsContainer({ teamData, unitMap, selectedGroup }: Tea
             {
                 selectedGroup === "teams" ? (<TopTeams updateFilter={updateFilter} filteredTeamData={filteredTeamData} unitMap={unitMap} />)
                     : selectedGroup === "augments" ? (<Augments augmentData={teamData.augments} />)
-                        : null
+                        : selectedGroup === "builder" ? (<TeamBuilder unitMap={unitMap} />)
+                            : null
             }
             {/* Filtering */}
 

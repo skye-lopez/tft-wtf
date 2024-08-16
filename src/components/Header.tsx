@@ -45,16 +45,6 @@ export default function Header({ sample, setSelectedGroup, selectedGroup }: Head
                 >
                     tftstats.xyz
                 </Text>
-                <Button
-                    colorScheme="pink"
-                    margin="5px"
-                    height="50px"
-                    onClick={() => window.open("https://buymeacoffee.com/arialopez", "_blank")}
-                >
-                    <FaRegHeart
-                        size="25px"
-                    />
-                </Button>
             </Flex>
             <Flex
                 background="white"
@@ -69,25 +59,25 @@ export default function Header({ sample, setSelectedGroup, selectedGroup }: Head
                 >
                     Top Teams
                 </Button>
+                <Button
+                    margin="3px 10px"
+                    colorScheme={selectedGroup === "builder" ? "blue" : "gray"}
+                    onClick={() => setSelectedGroup("builder")}
+                >
+                    Team Builder
+                </Button>
                 <Tooltip
                     label="Coming soon!"
                 >
                     <Button
                         margin="3px 10px"
-                        colorScheme={selectedGroup === "builder" ? "blue" : "gray"}
+                        colorScheme={selectedGroup === "augments" ? "blue" : "gray"}
+                        onClick={() => setSelectedGroup("augments")}
                         isDisabled={true}
                     >
-                        Team Builder
+                        Augments
                     </Button>
                 </Tooltip>
-                <Button
-                    margin="3px 10px"
-                    colorScheme={selectedGroup === "augments" ? "blue" : "gray"}
-                    onClick={() => setSelectedGroup("augments")}
-                    isDisabled={true}
-                >
-                    Augments
-                </Button>
                 <Tooltip
                     label="Coming soon!"
                 >
