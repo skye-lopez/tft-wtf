@@ -33,7 +33,7 @@ export default function App() {
     const [loading, setLoading] = useState<boolean>(true);
     const [teamData, setTeamData] = useState<TeamData>();
     const [unitMap, setUnitMap] = useState<UnitMap>({});
-    const [selectedGroup, setSelectedGroup] = useState<string>("augments");
+    const [selectedGroup, setSelectedGroup] = useState<string>("teams");
 
     function sortTeamData(teamData: TeamData): void {
         teamData?.teams.sort((a: Team, b: Team) => a.avg - b.avg);
