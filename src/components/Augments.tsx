@@ -29,7 +29,7 @@ interface AugmentsProps {
 export default function Augments({ augmentData }: AugmentsProps) {
     const [searchValue, setSearchValue] = useState<string>("");
     function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
-        setSearchValue(() => e.target.value.trim().toLowerCase());
+        setSearchValue(() => e.target.value.toLowerCase());
     }
     return (
         <Flex

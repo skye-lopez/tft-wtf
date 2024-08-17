@@ -33,7 +33,7 @@ export default function TeamInfo({ team, unitMap }: TeamProps) {
             if (old.indexOf(unit) === -1) {
                 return [...old, unit];
             }
-            return old;
+            return [...old];
         });
     }
 
