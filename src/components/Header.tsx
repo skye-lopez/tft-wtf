@@ -49,7 +49,7 @@ export default function Header({ sample, setSelectedGroup, selectedGroup }: Head
                     marginLeft="2px"
                     fontWeight="500"
                 >
-                    (beta)
+                    (v0.0.1)
                 </Text>
             </Flex>
             <Flex
