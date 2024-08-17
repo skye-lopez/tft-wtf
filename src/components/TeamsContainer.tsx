@@ -26,7 +26,7 @@ interface TeamsContainerProps {
 export default function TeamsContainer({ teamData, unitMap, selectedGroup }: TeamsContainerProps) {
     const [filteredTeamData, setFilteredTeamData] = useState<Team[]>([]);
     // sample, avg, top4%
-    const [filters, setFilters] = useState<number[]>([0, 5, 40]);
+    const [filters, setFilters] = useState<number[]>([500, 5, 40]);
     function updateFilter(e: any, idx: number) {
         setFilters((old: number[]) => {
             const n = [...old];
@@ -62,9 +62,6 @@ export default function TeamsContainer({ teamData, unitMap, selectedGroup }: Tea
                                 : null
             }
             {/* Filtering */}
-
-
-
         </Flex>
     );
 }

@@ -52,7 +52,7 @@ export default function TopTeams({ updateFilter, filteredTeamData, unitMap }: To
                         as="b"
                         width="fit-content"
                     >
-                        Patch 14.16 is new! Sample sizes are low, if you're trying to climb you may want to wait for data to even out.
+                        Patch 14.16 is new! Make sure to account for sample sizes.
                     </Code>
                 </Flex>
             </Flex>
@@ -85,11 +85,11 @@ export default function TopTeams({ updateFilter, filteredTeamData, unitMap }: To
                             border="2px solid purple.300"
                             onChange={(e) => updateFilter(e, 0)}
                         >
-                            <option value={0}>Any</option>
-                            <option value={100}>&#8805; 100</option>
                             <option value={500}>&#8805; 500</option>
+                            <option value={100}>&#8805; 100</option>
                             <option value={1000}>&#8805; 1000</option>
                             <option value={2000}>&#8805; 2000</option>
+                            <option value={0}>Any</option>
                         </Select>
                     </Flex>
                     <Flex
