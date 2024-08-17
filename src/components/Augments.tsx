@@ -1,86 +1,66 @@
 import {
     Flex,
     Text,
+    Image,
     Code,
-    Input,
     InputGroup,
+    Input,
     InputLeftAddon,
 } from "@chakra-ui/react";
 import {
     SearchIcon,
 } from "@chakra-ui/icons";
 import {
-    useState,
     useEffect,
+    useState,
 } from "react";
-
 import { Augment } from "../types/TeamData";
-import { parseAugmentId } from "../utils/stringFormatter";
+import {
+    parseAugmentId,
+} from "../utils/stringFormatter";
 
-interface AugmentProps {
+import augmentMetaData from "../utils/AugmentMetaData";
+import AugmentRow from "./AugmentRow";
+
+interface AugmentsProps {
     augmentData: Augment[]
 }
 
-export default function Augments({ augmentData }: AugmentProps) {
-    console.log(augmentData)
+export default function Augments({ augmentData }: AugmentsProps) {
     const [searchValue, setSearchValue] = useState<string>("");
-    const [searchResults, setSearchResults] = useState<Augment[]>([]);
-
-    function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-        setSearchValue(() => e.target.value);
+    function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
+        setSearchValue(() => e.target.value.trim().toLowerCase());
     }
-
-    useEffect(() => {
-        if (searchValue === "") {
-            setSearchResults(() => augmentData);
-            return;
-        }
-        setSearchResults(() => {
-            const filtered = augmentData.filter((a) => {
-                const { readableName } = parseAugmentId(a.id);
-                let search = searchValue.replace(/\s/g, '');
-
-                if ((readableName.toLowerCase()).includes(search.toLowerCase())) {
-                    return true;
-                }
-
-            });
-            return filtered;
-        });
-    }, [searchValue]);
-
     return (
         <Flex
-            flexDir="column"
-            width="100%"
+            direction="column"
             alignItems="center"
             justifyContent="center"
+            width="100%"
         >
-            <Flex
-                width="100%"
-                justifyContent="center"
+            <Text
+                as="b"
+                fontSize="2xl"
             >
-                <Code
-                    background="purple.100"
-                    padding="10px"
-                    margin="10px 10px"
-                    textAlign={"center"}
-                    borderRadius="10px"
-                    as="b"
-                    width="fit-content"
-                >
-                    View all augments or search below
-                </Code>
-            </Flex>
-            {/* SEARCH BAR */}
+                Augments
+            </Text>
+            <Code
+                background="purple.100"
+                padding="10px"
+                margin="10px 10px"
+                textAlign={"center"}
+                borderRadius="10px"
+                as="b"
+                width="fit-content"
+            >
+                Augments sorted by Avg, search for a specific augment.
+            </Code>
+
+            {/* Search */}
             <Flex
                 background="white"
-                padding="10px"
+                padding="10px 20px"
                 borderRadius="10px"
-                margin="10px"
-                maxWidth="90vw"
-                alignItems="center"
-                justifyContent="center"
             >
                 <InputGroup>
                     <InputLeftAddon>
@@ -88,36 +68,24 @@ export default function Augments({ augmentData }: AugmentProps) {
                     </InputLeftAddon>
                     <Input
                         value={searchValue}
-                        onChange={handleInput}
+                        onChange={handleSearch}
                     />
                 </InputGroup>
             </Flex>
-            {/* Results */}
-            <Flex
-                width="100%"
-                wrap="wrap"
-                flexDir="column"
-            >
-                {searchResults.map((a, i) => <AugmentInfo augment={a} key={i} />)}
-            </Flex>
-        </Flex>
-    );
-}
 
-interface AugmentInfoProps {
-    augment: Augment
-    key: number
-}
-
-function AugmentInfo({ augment }: AugmentInfoProps) {
-    const { rawName, readableName } = parseAugmentId(augment.id);
-    return (
-        <Flex
-            margin="10px"
-        >
-            <Code>
-                {readableName}
-            </Code>
+            {/* Result */}
+            {
+                augmentData.map((a, i) => {
+                    const { rawName } = parseAugmentId(a.id);
+                    const { displayName } = augmentMetaData[rawName];
+                    if (searchValue === "" || displayName.toLowerCase().includes(searchValue)) {
+                        return (
+                            <AugmentRow augment={a} key={i} />
+                        );
+                    }
+                    return null;
+                })
+            }
         </Flex>
     );
 }

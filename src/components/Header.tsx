@@ -79,18 +79,13 @@ export default function Header({ sample, setSelectedGroup, selectedGroup }: Head
                 >
                     Units
                 </Button>
-                <Tooltip
-                    label="Coming soon!"
+                <Button
+                    margin="3px 10px"
+                    colorScheme={selectedGroup === "augments" ? "blue" : "gray"}
+                    onClick={() => setSelectedGroup("augments")}
                 >
-                    <Button
-                        margin="3px 10px"
-                        colorScheme={selectedGroup === "augments" ? "blue" : "gray"}
-                        onClick={() => setSelectedGroup("augments")}
-                        isDisabled={true}
-                    >
-                        Augments
-                    </Button>
-                </Tooltip>
+                    Augments
+                </Button>
             </Flex>
 
             <DataInfoBanner

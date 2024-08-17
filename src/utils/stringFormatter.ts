@@ -77,19 +77,8 @@ function parseItemId(id: string): ItemInfo {
 interface AugmentIdInfo {
     rawName: string
     readableName: string
-    gameReadableName: string
     set: string
     patch: string
-    imageUrl: string
-}
-
-const GAME_NAME_MAP = {
-    "NunuCarry": "Sweet Tooth",
-    "NunuCarryPlus": "Sweet Tooth+",
-    "GalioCarry": "Deja Vu",
-    "GalioCarryPlus": "Deja Vu+",
-    "PortalCrest": "Portal Crest",
-    "PortalCrown": "Portal Crown",
 }
 
 function getAugmentURL(id: string): string {
@@ -104,10 +93,8 @@ function parseAugmentId(id: string): AugmentIdInfo {
     return {
         rawName,
         readableName: splitName[splitName.length - 1],
-        gameReadableName: "",
         set,
         patch,
-        imageUrl: "",
     };
 }
 
