@@ -43,17 +43,6 @@ export default function TopTeams({ updateFilter, filteredTeamData, unitMap }: To
                     >
                         Sorted by Avg. Data filters below. Click any unit to get its best items.
                     </Code>
-                    <Code
-                        background="red.100"
-                        padding="10px"
-                        margin="10px 10px"
-                        textAlign={"center"}
-                        borderRadius="10px"
-                        as="b"
-                        width="fit-content"
-                    >
-                        Patch 14.16 is new! Make sure to account for sample sizes.
-                    </Code>
                 </Flex>
             </Flex>
             {/* FILTER */}
