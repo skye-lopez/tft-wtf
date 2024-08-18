@@ -13,7 +13,10 @@ import {
     formatAvg,
     formatPercent,
     parseUnitId,
+    unitIdToName,
 } from "../utils/stringFormatter";
+
+import unitMetaData from "../utils/UnitMetaData";
 
 import { Team } from "../types/TeamData";
 import { UnitMap } from "../App";
@@ -63,7 +66,11 @@ export default function TeamInfo({ team, unitMap }: TeamProps) {
                     width="100%"
                     flexWrap="wrap"
                 >
-                    {team?.unit_ids.map((unit, i) => {
+                    {team?.unit_ids.sort((a, b) => {
+                        const aName = unitIdToName(a);
+                        const bName = unitIdToName(b);
+                        return unitMetaData[aName].cost - unitMetaData[bName].cost
+                    }).map((unit, i) => {
                         const { rawName } = parseUnitId(unit);
                         if (rawName.toLowerCase() === "tft12_yuumi" || rawName.toLowerCase().includes("elderdragon")) {
                             return
