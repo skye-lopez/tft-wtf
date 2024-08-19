@@ -17,6 +17,7 @@ import {
 } from "../utils/stringFormatter";
 
 import unitMetaData from "../utils/UnitMetaData";
+import traitMetaData from "../utils/TraitMetaData";
 
 import { Team } from "../types/TeamData";
 import { UnitMap } from "../App";
@@ -30,6 +31,7 @@ interface TeamProps {
 
 export default function TeamInfo({ team, unitMap }: TeamProps) {
     const [unitBanners, setUnitBanners] = useState<string[]>([]);
+    const [traits, setTraits] = useState<any>([]);
 
     function addUnitBanner(unit: string) {
         setUnitBanners((old: string[]) => {
@@ -49,6 +51,27 @@ export default function TeamInfo({ team, unitMap }: TeamProps) {
         })
     }
 
+    useEffect(() => {
+        if (!team) return;
+        setTraits(() => {
+            const t: any = {};
+            for (const unitId of team.unit_ids) {
+                const unitTraits = unitMetaData[unitIdToName(unitId)].traits;
+                unitTraits.forEach((trait: string) => t?.[trait] ? t[trait]++ : t[trait] = 1);
+            }
+            const sortedT = [];
+            for (const [key, value] of Object.entries(t)) {
+                sortedT.push([key, value]);
+            }
+            sortedT.sort((a: any, b: any) => b[1] - a[1]);
+            return sortedT;
+        })
+    }, []);
+
+    useEffect(() => {
+        console.log(traits);
+    }, [traits]);
+
     return (
         <Flex
             flexDir="column"
@@ -61,6 +84,25 @@ export default function TeamInfo({ team, unitMap }: TeamProps) {
                 flexWrap="wrap"
             >
                 {/* Units */}
+                <Flex
+                    wrap="wrap"
+                >
+                    {traits.map((t: any) => {
+                        if (t[1] < traitMetaData[t[0]]) return null;
+                        return (
+                            <Text
+                                as="b"
+                                background="whitesmoke"
+                                borderRadius="10px"
+                                padding="2px 5px"
+                                margin="3px"
+                            >
+                                {t[1]} {t[0]}
+                            </Text>
+
+                        );
+                    })}
+                </Flex>
                 <Flex
                     justifyContent="flex-start"
                     width="100%"
