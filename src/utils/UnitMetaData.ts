@@ -10,7 +10,7 @@ const unitMetaData: UnitMetaData = {
     "Akali": { cost: 2, traits: ["Multistriker", "Warrior", "Pyro"], },
     "Ashe": { cost: 1, traits: ["Multistriker", "Eldritch"], },
     "Bard": { cost: 3, traits: ["Scholar", "Sugarcraft", "Preserver"], },
-    "Briar": { cost: 5, traits: ["Shapeshifter", "Eldritch", "Ravenous"], },
+    "Briar": { cost: 5, traits: ["Shapeshifter", "Eldritch"], },
     "Blitz": { cost: 1, traits: ["Honeymancer", "Vanguard"], },
     "Camille": { cost: 5, traits: ["Chrono", "Multistriker"], },
     "Cassio": { cost: 2, traits: ["Witchcraft", "Incantor"], },
